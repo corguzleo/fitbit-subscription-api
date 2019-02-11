@@ -15,7 +15,7 @@ var jsonParser = bodyParser.json();
 // init fitbit client
 var FitbitApiClient = require("fitbit-node");
 var	client = new FitbitApiClient({clientId: process.env.FITBIT_CLIENT_ID, clientSecret:process.env.FITBIT_SECERT, apiVersion:'1.2'});
-var FITBITSCOPES = 'activity profile weight';
+var FITBITSCOPES = 'activity profile weight nutrition settings sleep';
 
 var saveToken = function( user_id, data, cb ){
 	var _data = {
@@ -115,7 +115,7 @@ app.get("/callback", function (req, res) {
 			
 			// create the body subscription with the user id from the authorize route
 			client.post("/body/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
-				console.log('BODY SUBSCRIPTIONS RESULTS: ' + results[0]);
+				console.log('BODY SUBSCRIPTIONS RESULTS: ' + JSON.stringify(results[0]));
 				// grab the subscriptionId witch matches the user_id
 				var user_id = results[0].subscriptionId;
 				console.log("USER BODY SUBSCRIPTED for user `" + results[0].subscriptionId + "`");
