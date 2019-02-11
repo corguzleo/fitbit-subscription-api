@@ -96,6 +96,7 @@ app.get("/authorize/:user_id", function (req, res) {
 // add a callback url The url to this route should be public availible
 app.get("/callback", function (req, res) {
 	console.log('ENTERED get Callback');
+	console.log('REQUEST: ' + JSON.stringify(req));
 
 	// as define in the authorize route the user id will be passed back through the state query
 	var _uid = req.query.state;
