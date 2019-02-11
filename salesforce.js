@@ -37,7 +37,7 @@ let createHeartRateRecord = (params) => {
             hr.set('Patient__c', account);
             hr.set('Heart_Rate_Zone__c', rec.hearRateZone);
             hr.set('Calories_Out__c', rec.caloriesOut);
-            hr.set('Min__c', rec,min);
+            hr.set('Min__c', rec.min);
             hr.set('Max__c', rec.max);
             hr.set('Minutes__c', rec.minutes);
             console.log('To be inserted: ' + JSON.stringify(hr));
