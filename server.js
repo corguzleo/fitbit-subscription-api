@@ -14,7 +14,7 @@ var jsonParser = bodyParser.json();
 
 // init fitbit client
 var FitbitApiClient = require("fitbit-node");
-var	client = new FitbitApiClient('22DBYQ', '20bc1ed36e2966372875bf945a952bf5');
+var	client = new FitbitApiClient({clientId: '22DBYQ', clientSecret:'20bc1ed36e2966372875bf945a952bf5', apiVersion:'1.2'});
 var FITBITSCOPES = 'activity profile weight';
 
 var saveToken = function( user_id, data, cb ){
