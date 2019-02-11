@@ -3,6 +3,7 @@
 var async = require("async");
 var crypto = require("crypto");
 var Redis = require("redis");
+let salesforce = require("./salesforce");
 
 var rds = Redis.createClient(process.env.REDIS_URL);
 
@@ -176,6 +177,7 @@ var readFitbitData = function( data, cb ){
 		client.get( _url, access_token, fitbit_user )
 			.then(function (results) {
 				console.log("RECEIVED CHANGED DATA `" + type + "` for user `" + user_id + "`", results[0] );
+				getHeartReadings(results[0]);
 				cb( null );
 			}).catch(function (error) {
 				cb( error );
@@ -238,5 +240,37 @@ var testSignature = function( sig, data ){
 		return false
 	}
 }
+
+var getHeartReadings = function(data){
+	console.log('SUMMARY: '  + data.summary);
+	var heartRates = [];
+	if(data.summary){
+		console.log('SUMMARY DATA AVAILABLE');
+		var rates = data.summary.heartRateZones;
+		if(rates){
+			rates.forEach(rate => {
+				var hr = {};
+				hr.set('hearRateZone', rate.name);
+				console.log('Name: '+ rate.name);
+				hr.set('caloriesOut', rate.caloriesOut);
+				console.log('Calories Out: '+ rate.caloriesOut);
+				hr.set('min', rate.min);
+				console.log('Min: '+ rate.min);
+				hr.set('max', rate.max);
+				console.log('Max: '+ rate.max);
+				hr.set('minutes', rate.minutes);
+				console.log('Minutes: '+ rate.minutes);
+				heartRates.push(hr);
+			});
+			salesforce.createHeartRateRecord(heartRates)
+			.then(hr=>{
+				console.log('Heart Rate readings inserted successfully');
+			})
+			.catch((err)=>{
+				console.log('Error inserting reading: ' + err);
+			});
+		}
+	}
+};
 
 app.listen(process.env.PORT || 8080);
