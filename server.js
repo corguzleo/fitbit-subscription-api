@@ -14,7 +14,7 @@ var jsonParser = bodyParser.json();
 
 // init fitbit client
 var FitbitApiClient = require("fitbit-node");
-var	client = new FitbitApiClient({clientId: '22DBYQ', clientSecret:'20bc1ed36e2966372875bf945a952bf5', apiVersion:'1.2'});
+var	client = new FitbitApiClient({clientId: process.env.FITBIT_CLIENT_ID, clientSecret:process.env.FITBIT_SECERT, apiVersion:'1.2'});
 var FITBITSCOPES = 'activity profile weight';
 
 var saveToken = function( user_id, data, cb ){
@@ -27,6 +27,7 @@ var saveToken = function( user_id, data, cb ){
 		expire_ts: Date.now() + ( 1000 * data.expires_in )
 	};
 	
+	console.log('TOKEN DATA: ' + JSON.stringify(_data));
 	console.log("SAVED TOKEN for user `" + user_id + "`");
 	rds.hset( "fitbit-subscription-example", user_id, JSON.stringify( _data ), function( err ){
 		if( err ){
@@ -88,13 +89,17 @@ app.get("/authorize/:user_id", function (req, res) {
 	_url += "&state=" + req.params.user_id;
 	
 	console.log("AUTHORIZE USER", _uid);
+	console.log("REDIRECT_URL: " + _url);
 	res.redirect(_url);
 });
 
 // add a callback url The url to this route should be public availible
 app.get("/callback", function (req, res) {
+	console.log('ENTERED get Callback');
+
 	// as define in the authorize route the user id will be passed back through the state query
 	var _uid = req.query.state;
+	console.log('UserId: ' + _uid);
 	
 	// get the access token to create a subscription by the oauth code
 	var _code = req.query.code;
