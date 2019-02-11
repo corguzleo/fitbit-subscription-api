@@ -114,21 +114,22 @@ app.get("/callback", function (req, res) {
 			}
 			
 			// create the body subscription with the user id from the authorize route
-			client.post("/body/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
+			client.post("/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
 				//console.log('BODY SUBSCRIPTIONS RESULTS: ' + JSON.stringify(results[0]));
 				// grab the subscriptionId witch matches the user_id
 				var user_id = results[0].subscriptionId;
 				console.log("USER BODY SUBSCRIPTED for user `" + results[0].subscriptionId + "`");
+				res.send("USER: `"+ results[0].subscriptionId + "` CONNECTED");
 				
 				// create the activities subscription with the user id from the authorize route
-				client.post("/activities/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
+				//client.post("/activities/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
 					// grab the subscriptionId witch matches the user_id
-					console.log("USER ACTIVITIES SUBSCRIPTED for user `" + user_id + "`");
+					//console.log("USER ACTIVITIES SUBSCRIPTED for user `" + user_id + "`");
 					// return the user id
-					res.send("USER: `"+ results[0].subscriptionId + "` CONNECTED");
+					/*res.send("USER: `"+ results[0].subscriptionId + "` CONNECTED");
 				}).catch(function (error) {
 					res.send(500, error);
-				});
+				});*/
 
 			}).catch(function (error) {
 				res.send(500, error);
