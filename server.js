@@ -118,7 +118,7 @@ app.get("/callback", function (req, res) {
 				console.log('BODY SUBSCRIPTIONS RESULTS: ' + results[0]);
 				// grab the subscriptionId witch matches the user_id
 				var user_id = results[0].subscriptionId;
-				console.log("USER BODY SUBSCRIPTED for user `" + user_id + "`");
+				console.log("USER BODY SUBSCRIPTED for user `" + results[0].subscriptionId + "`");
 				
 				// create the activities subscription with the user id from the authorize route
 				client.post("/activities/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
