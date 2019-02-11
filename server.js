@@ -141,6 +141,8 @@ app.get("/callback", function (req, res) {
 
 // the webhook GET is the endpoint to verify the endpoint by the fitbit servers
 app.get("/webhook", function (req, res) {
+	console.log('Entered WEBHOOK GET: ' + req.query.verify);
+	console.log('VERIFY ENV VAR: ' + process.env.FITBIT_SUBSCRIPTION_VERIFY);
 	if( req.query.verify === process.env.FITBIT_SUBSCRIPTION_VERIFY ){
 		// should return 204 if the verify query matches
 		console.log("WEBHOOK-VERIFY - OK");
