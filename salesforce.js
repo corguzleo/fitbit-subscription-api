@@ -57,3 +57,4 @@ let createHeartRateRecord = (params) => {
 login();
 
 exports.org = org;
+exports.createHeartRateRecord = createHeartRateRecord;
