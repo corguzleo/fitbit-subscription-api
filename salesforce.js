@@ -36,7 +36,7 @@ let createHeartRateRecord = (params) => {
             console.log('Record: ' + JSON.stringify(rec));
             let hr = nforce.createSObject('Heart_Rate__c');
             hr.set('Patient__c', account);
-            hr.set('Heart_Rate_Zone__c', rec.hearRateZone);
+            hr.set('Heart_Rate_Zone__c', rec.heartRateZone);
             hr.set('Calories_Out__c', rec.caloriesOut);
             hr.set('Min__c', rec.min);
             hr.set('Max__c', rec.max);

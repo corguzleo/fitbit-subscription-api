@@ -249,7 +249,7 @@ var getHeartReadings = function(data){
 		var rates = data.summary.heartRateZones;
 		if(rates){
 			rates.forEach(rate => {
-				var hr = {'heartRartZone': rate.name, 'caloriesOut':rate.caloriesOut, 'min':rate.min, 'max':rate.max, 'minutes':rate.minutes};
+				var hr = {'heartRateZone': rate.name, 'caloriesOut':rate.caloriesOut, 'min':rate.min, 'max':rate.max, 'minutes':rate.minutes};
 				
 				console.log('Name: '+ rate.name);
 				
