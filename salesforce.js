@@ -30,6 +30,7 @@ let createHeartRateRecord = (params) => {
     console.log('Entered Salesforce function with ' + params.length + ' params');
     let account = '0011U00000AbwZIQAZ';
     let heartRates = [];
+    let errors = 0;
     return new Promise((resolve, reject) => {
         params.forEach(rec => {
             console.log('Record: ' + JSON.stringify(rec));
@@ -41,19 +42,23 @@ let createHeartRateRecord = (params) => {
             hr.set('Max__c', rec.max);
             hr.set('Minutes__c', rec.minutes);
             console.log('To be inserted: ' + JSON.stringify(hr));
-            heartRates.push(hr);
+            org.insert({sobject: hr}, err=>{
+                if(err){
+                    console.log('Error: ' + err);
+                    errors++;
+                }
+                else{
+                    console.log('Inserción exitosa');
+                }
+            })
         });
         
-        org.insert({sobject: heartRates}, err => {
-            if(err){
-                console.log('Error: ' + err);
-                reject(err);
-            }
-            else{
-                console.log('Inserción exitosa');
-                resolve(hr);
-            }
-        });
+        if(errors > 0){
+            reject(err);
+        }
+        else{
+            resolve({});
+        }
     });
 }
 
