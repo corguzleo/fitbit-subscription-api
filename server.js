@@ -99,7 +99,8 @@ app.get("/callback", function (req, res) {
 	console.log('REQUEST: ' + req.query);
 
 	// as define in the authorize route the user id will be passed back through the state query
-	var _uid = req.query.state;
+	//var _uid = req.query.state;
+	var _uid = '79P6KV';
 	console.log('UserId: ' + _uid);
 	
 	// get the access token to create a subscription by the oauth code
