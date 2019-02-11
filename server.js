@@ -115,6 +115,7 @@ app.get("/callback", function (req, res) {
 			
 			// create the body subscription with the user id from the authorize route
 			client.post("/body/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
+				console.log('BODY SUBSCRIPTIONS RESULTS: ' + results[0]);
 				// grab the subscriptionId witch matches the user_id
 				var user_id = results[0].subscriptionId;
 				console.log("USER BODY SUBSCRIPTED for user `" + user_id + "`");
