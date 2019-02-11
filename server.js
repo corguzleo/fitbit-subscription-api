@@ -249,16 +249,16 @@ var getHeartReadings = function(data){
 		var rates = data.summary.heartRateZones;
 		if(rates){
 			rates.forEach(rate => {
-				var hr = {};
-				hr.set('hearRateZone', rate.name);
+				var hr = {'heartRartZone': rate.name, 'caloriesOut':rate.caloriesOut, 'min':rate.min, 'max':rate.max, 'minutes':rate.minutes};
+				
 				console.log('Name: '+ rate.name);
-				hr.set('caloriesOut', rate.caloriesOut);
+				
 				console.log('Calories Out: '+ rate.caloriesOut);
-				hr.set('min', rate.min);
+				
 				console.log('Min: '+ rate.min);
-				hr.set('max', rate.max);
+				
 				console.log('Max: '+ rate.max);
-				hr.set('minutes', rate.minutes);
+				
 				console.log('Minutes: '+ rate.minutes);
 				heartRates.push(hr);
 			});
