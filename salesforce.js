@@ -35,6 +35,7 @@ let createHeartRateRecord = (params) => {
         params.forEach(rec => {
             console.log('Record: ' + JSON.stringify(rec));
             let hr = nforce.createSObject('Heart_Rate__c');
+            let fbp = nforce.createSObject('Fitbit_Platform_Event__e');
             hr.set('Patient__c', account);
             hr.set('Heart_Rate_Zone__c', rec.heartRateZone);
             hr.set('Calories_Out__c', rec.caloriesOut);
@@ -50,7 +51,18 @@ let createHeartRateRecord = (params) => {
                 else{
                     console.log('Inserción exitosa');
                 }
-            })
+            });
+            fbp.set('Fitbit_Id__c','79P6KV');
+            fbp.set('User__c', '0051U000003fXHBQA2');
+            fbp.set('Value__c',rec.max);
+            org.insert({sobject: fbp}, err=>{
+                if(err){
+                    console.log('Error inserting platform event: ' + err);
+                }
+                else{
+                    console.log('Platform event inserted successfully');
+                }
+            });
         });
         
         if(errors > 0){
