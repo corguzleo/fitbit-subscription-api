@@ -43,7 +43,7 @@ let createHeartRateRecord = (params) => {
             hr.set('Max__c', rec.max);
             hr.set('Minutes__c', rec.minutes);
             console.log('To be inserted: ' + JSON.stringify(hr));
-            org.insert({sobject: hr}, err=>{
+            /*org.insert({sobject: hr}, err=>{
                 if(err){
                     console.log('Error: ' + err);
                     errors++;
@@ -51,7 +51,7 @@ let createHeartRateRecord = (params) => {
                 else{
                     console.log('Inserción exitosa');
                 }
-            });
+            });*/
             fbp.set('Fitbit_Id__c','79P6KV');
             fbp.set('User__c', '0051U000003fXHBQA2');
             fbp.set('Value__c',rec.max);
