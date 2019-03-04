@@ -16,7 +16,7 @@ var jsonParser = bodyParser.json();
 // init fitbit client
 var FitbitApiClient = require("fitbit-node");
 var	client = new FitbitApiClient({clientId: process.env.FITBIT_CLIENT_ID, clientSecret:process.env.FITBIT_SECERT, apiVersion:'1.2'});
-var FITBITSCOPES = 'body';
+var FITBITSCOPES = 'activity profile weight nutrition settings sleep';
 
 var saveToken = function( user_id, data, cb ){
 	var _data = {
