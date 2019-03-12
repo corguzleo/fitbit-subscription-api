@@ -55,7 +55,7 @@ let createHeartRateRecord = (params) => {
             fbp.set('Fitbit_Id__c','79P6KV');
             fbp.set('User__c', '0051U000003fXHBQA2');
             fbp.set('Value__c',rec.max);
-            if(rec.heartRateZone == 'Fat Burn'){
+            if(rec.heartRateZone == 'Out of Range'){
                 org.insert({sobject: fbp}, err=>{
                     if(err){
                         console.log('Error inserting platform event: ' + err);
