@@ -177,7 +177,7 @@ var readFitbitData = function( data, cb ){
 		client.get( _url, access_token, fitbit_user )
 			.then(function (results) {
 				console.log("RECEIVED CHANGED DATA `" + type + "` for user `" + user_id + "`", results[2] );
-				console.log(results);
+				console.log(JSON.stringify(results));
 				getHeartReadings(results[0]);
 				cb( null );
 			}).catch(function (error) {
