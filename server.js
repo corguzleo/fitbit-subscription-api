@@ -123,7 +123,7 @@ app.get("/callback", function (req, res) {
 			
 			// create the body subscription with the user id from the authorize route
 			client.post("/apiSubscriptions/" + _uid + ".json", access_token ).then(function (results) {
-				console.log('BODY SUBSCRIPTIONS RESULTS: ' + JSON.stringify(results[0]));
+				console.log('BODY SUBSCRIPTIONS RESULTS: ' + JSON.stringify(results));
 				// grab the subscriptionId witch matches the user_id
 				var user_id = results[0].subscriptionId;
 				console.log("USER BODY SUBSCRIPTED for user `" + results[0].subscriptionId + "`");
@@ -197,7 +197,7 @@ var readFitbitData = function( data, cb ){
 // this endpoint will receive the events from your subscribed users
 app.post("/webhook", jsonParser, function (req, res) {
 	console.log("WEBHOOK-DATA with " + req.body.length + " events");
-	
+	console.log("WEBHOOK-DATA " + JSON.stringify(req.body) );
 	// check signature
 	var fitbitSignature = req.headers[ "x-fitbit-signature" ];
 	if( !testSignature( fitbitSignature, req.body ) ){
