@@ -7,6 +7,10 @@ let salesforce = require("./salesforce");
 
 var rds = Redis.createClient(process.env.REDIS_URL);
 
+let FITBIT_USER_ID = '7HYZQT';
+//GABO 79P6KV
+//LEO 7HYZQT
+
 // init express
 var express = require("express");
 var bodyParser = require('body-parser');
@@ -101,7 +105,7 @@ app.get("/callback", function (req, res) {
 
 	// as define in the authorize route the user id will be passed back through the state query
 	//var _uid = req.query.state;
-	var _uid = '79P6KV';
+	var _uid = FITBIT_USER_ID;
 	console.log('UserId: ' + _uid);
 	
 	// get the access token to create a subscription by the oauth code

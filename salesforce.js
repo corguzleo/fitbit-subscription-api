@@ -7,6 +7,10 @@ let nforce = require('nforce'),
     SF_USER_NAME = process.env.SF_USER_NAME,
     SF_PASSWORD = process.env.SF_PASSWORD;
 
+let FITBIT_USER_ID = '7HYZQT';
+//GABO 79P6KV
+//LEO 7HYZQT
+
 let org = nforce.createConnection({
     clientId: SF_CLIENT_ID,
     clientSecret: SF_CLIENT_SECRET,
@@ -52,7 +56,8 @@ let createHeartRateRecord = (params) => {
                     console.log('Inserción exitosa');
                 }
             });
-            fbp.set('Fitbit_Id__c','79P6KV');
+            
+            fbp.set('Fitbit_Id__c',FITBIT_USER_ID);
             fbp.set('User__c', '0051U000003fXHBQA2');
             fbp.set('Value__c',rec.max);
             if(rec.heartRateZone == 'Out of Range'){
