@@ -11,6 +11,9 @@ let FITBIT_USER_ID = '7HYZQT';
 //GABO 79P6KV
 //LEO 7HYZQT
 
+//let REDIS_SUSCRIPTION_NAME = "fitbit-subscription-example";
+let REDIS_SUSCRIPTION_NAME = "sf-fitbit-demo";
+
 // init express
 var express = require("express");
 var bodyParser = require('body-parser');
@@ -34,7 +37,7 @@ var saveToken = function( user_id, data, cb ){
 	
 	console.log('TOKEN DATA: ' + JSON.stringify(_data));
 	console.log("SAVED TOKEN for user `" + user_id + "`");
-	rds.hset( "fitbit-subscription-example", user_id, JSON.stringify( _data ), function( err ){
+	rds.hset( REDIS_SUSCRIPTION_NAME, user_id, JSON.stringify( _data ), function( err ){
 		if( err ){
 			cb( err );
 			return;
@@ -45,7 +48,7 @@ var saveToken = function( user_id, data, cb ){
 };
 
 var getToken = function( user_id, cb ){
-	rds.hget( "fitbit-subscription-example", user_id, function( err, resp ){
+	rds.hget( REDIS_SUSCRIPTION_NAME, user_id, function( err, resp ){
 		if( err ){
 			cb( err );
 			return;
@@ -70,7 +73,7 @@ var refreshToken = function( user_id, data, cb ){
 		
 		data.access_token = refreshToken;
 		
-		rds.hset( "fitbit-subscription-example", user_id, JSON.stringify( data ), function( err ){
+		rds.hset( REDIS_SUSCRIPTION_NAME, user_id, JSON.stringify( data ), function( err ){
 			if( err ){
 				cb( err );
 				return;
