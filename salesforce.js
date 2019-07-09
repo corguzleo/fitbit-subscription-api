@@ -5,9 +5,11 @@ let nforce = require('nforce'),
     SF_CLIENT_ID = process.env.SF_CLIENT_ID,
     SF_CLIENT_SECRET = process.env.SF_CLIENT_SECRET,
     SF_USER_NAME = process.env.SF_USER_NAME,
-    SF_PASSWORD = process.env.SF_PASSWORD;
+    SF_PASSWORD = process.env.SF_PASSWORD,
+    SF_USER_ID = process.env.SF_USER_ID,
+    SF_ACCOUNT = process.env.SF_ACCOUNT,
+    FITBIT_USER_ID = process.env.FITBIT_USER_ID;
 
-let FITBIT_USER_ID = '7HYZQT';
 //GABO 79P6KV
 //LEO 7HYZQT
 
@@ -32,7 +34,7 @@ let login = () => {
 
 let createHeartRateRecord = (params) => {
     console.log('Entered Salesforce function with ' + params.length + ' params');
-    let account = '0011U00000AbwZIQAZ';
+    let account = SF_ACCOUNT;
     let heartRates = [];
     let errors = 0;
     return new Promise((resolve, reject) => {
@@ -58,7 +60,7 @@ let createHeartRateRecord = (params) => {
             });
             
             fbp.set('Fitbit_Id__c',FITBIT_USER_ID);
-            fbp.set('User__c', '0051U000003fXHBQA2');
+            fbp.set('User__c', SF_USER_ID);
             fbp.set('Value__c',rec.max);
             if(rec.heartRateZone == 'Out of Range'){
                 org.insert({sobject: fbp}, err=>{

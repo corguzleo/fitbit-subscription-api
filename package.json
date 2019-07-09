@@ -11,7 +11,7 @@
     "heroku",
     "salesforce"
   ],
-  "author": "Gabriel Camarena Gomez",
+  "author": "GCG LCG",
   "license": "ISC",
   "dependencies": {
     "async": "^2.0.0-rc.3",

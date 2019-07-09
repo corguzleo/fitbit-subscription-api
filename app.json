@@ -1,0 +1,49 @@
+{
+    "name": "Deploy Button",
+    "description": "fitbit-subscription-api integrated with Salesforce Events and API",
+    "repository": "https://github.com/heroku/button-sample",
+    "logo": "http://node-js-sample.herokuapp.com/node.svg",
+    "keywords": [
+        "Fitbit",
+        "heroku",
+        "salesforce"
+    ],
+    "env": {
+        "FITBIT_CALLBACK_URL": {
+            "description":"FITBIT_CALLBACK_URL"
+        },
+        "FITBIT_CLIENT_ID": {
+            "description":"FITBIT_CLIENT_ID"
+        },
+        "FITBIT_SECRET": {
+            "description":"FITBIT_SECRET"
+        },
+        "FITBIT_SUBSCRIPTION_VERIFY": {
+            "description":"FITBIT_SUBSCRIPTION_VERIFY"
+        },
+        "SF_CLIENT_ID": {
+            "description":"SF_CLIENT_ID"
+        },
+        "SF_CLIENT_SECRET": {
+            "description":"SF_CLIENT_SECRET"
+        },
+        "SF_PASSWORD": {
+            "description":"SF_PASSWORD"
+        },
+        "SF_USER_NAME": {
+            "description":"SF_USER_NAME"
+        },
+        "SF_ACCOUNT": {
+            "description":"SF_ACCOUNT"
+        },
+        "SF_USER_ID": {
+            "description":"SF_USER_ID"
+        }
+    },
+    "addons": [
+        {
+            "plan": "heroku-redis:hobby-dev",
+            "as": "REDIS"
+        }
+    ]
+  }

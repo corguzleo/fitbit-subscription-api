@@ -7,7 +7,7 @@ let salesforce = require("./salesforce");
 
 var rds = Redis.createClient(process.env.REDIS_URL);
 
-let FITBIT_USER_ID = '7HYZQT';
+let FITBIT_USER_ID = process.env.FITBIT_USER_ID;
 //GABO 79P6KV
 //LEO 7HYZQT
 
@@ -22,7 +22,7 @@ var jsonParser = bodyParser.json();
 
 // init fitbit client
 var FitbitApiClient = require("fitbit-node");
-var	client = new FitbitApiClient({clientId: process.env.FITBIT_CLIENT_ID, clientSecret:process.env.FITBIT_SECERT, apiVersion:'1.2'});
+var	client = new FitbitApiClient({clientId: process.env.FITBIT_CLIENT_ID, clientSecret:process.env.FITBIT_SECRET, apiVersion:'1.2'});
 var FITBITSCOPES = 'activity profile weight nutrition settings sleep';
 
 var saveToken = function( user_id, data, cb ){
@@ -240,7 +240,7 @@ var getFitbitUrl = function( type, data ){
 
 // check the fitbit webhook signature
 var testSignature = function( sig, data ){
-	var hmac = crypto.createHmac('sha1', process.env.FITBIT_SECERT+'&')
+	var hmac = crypto.createHmac('sha1', process.env.FITBIT_SECRET+'&')
 	hmac.update(JSON.stringify(data))
 	if( sig === hmac.digest('base64') ){
 		return true
