@@ -15,8 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.0.0-rc.3",
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
     "fitbit-node": "^2.0.0",
     "redis": "^2.6.0-1",
     "nforce": "^1.4.1"
